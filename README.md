@@ -297,6 +297,4 @@ Pages in `src/Page/` are thin wrappers that just render the module component. Th
 
 ---
 
-## Deployment
-
-Deployed on **Vercel**.
+## Deployment On Vercel
