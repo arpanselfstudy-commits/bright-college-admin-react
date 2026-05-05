@@ -310,6 +310,4 @@ Pages in `src/Page/` are thin wrappers that just render the module component. Th
 
 ---
 
-## Deployment
-
-Deployed on **Netlify**. The `netlify.toml` and `public/_redirects` handle SPA routing so direct URL access and page refreshes work correctly.
+## Deployment On Vercel
