@@ -11,6 +11,7 @@
 
 > Scores measured on the live production build via [Google Lighthouse](https://developer.chrome.com/docs/lighthouse/overview/).
 
+
 ---
 
 **Live Demo:** [https://bright-college-admin-react.vercel.app/](https://bright-college-admin-react.vercel.app/)
