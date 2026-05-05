@@ -177,10 +177,110 @@
   color: #0567a6;
 }
 
-.log-copyrht a {
-  color: #05a0bf;
+.log-copyrht-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--clr-dark-gray, #5a5a5a);
+  margin-bottom: 8px;
+  letter-spacing: 0.3px;
+}
+
+.log-copyrht-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.log-copyrht-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #5a5a5a;
+  text-decoration: none;
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1px solid #e0e0e0;
+  background: #f9fafb;
+  transition: all 0.2s ease;
+}
+
+.log-copyrht-link:hover {
+  background: #05a0bf;
+  color: #fff;
+  border-color: #05a0bf;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(5, 160, 191, 0.25);
+}
+
+.log-copyrht-icon {
+  font-size: 14px;
+}
+
+.log-copyrht-divider {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #d0d0d0;
+  display: inline-block;
 }
 
 .profile-setup-wrap {
   background: linear-gradient(135deg, var(--clr-blue) 0%, var(--clr-accent-blue) 100%);
+}
+
+/* ============ Demo Credentials Box ============= */
+.demo-credentials {
+  margin-top: 36px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 14px;
+  padding: 18px 22px;
+  backdrop-filter: blur(6px);
+  text-align: left;
+  max-width: 320px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.demo-credentials-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+  margin-bottom: 12px;
+}
+
+.demo-credentials-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.demo-credentials-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.demo-credentials-label {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 500;
+  min-width: 64px;
+}
+
+.demo-credentials-value {
+  font-size: 13px;
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  word-break: break-all;
+  text-align: right;
 }

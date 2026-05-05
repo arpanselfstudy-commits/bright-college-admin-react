@@ -1,5 +1,9 @@
 # Bright College Hub — Admin Panel
 
+**Live Demo:** [https://69f9850779716f0008579667--bright-college-hub-admin-react.netlify.app](https://69f9850779716f0008579667--bright-college-hub-admin-react.netlify.app)
+
+> Login with: `collage-admin@yopmail.com` / `12345678`
+
 A production-ready admin panel built with React + TypeScript. This project was built to demonstrate real-world frontend engineering skills — clean architecture, type safety, reusable components, secure auth flow, and scalable state management.
 
 ---

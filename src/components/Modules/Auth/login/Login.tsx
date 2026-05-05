@@ -4,7 +4,7 @@ import './auth.css';
 import useLogin from './useLogin';
 import FormField from '../../../Common/form/FormField';
 import CustomButton from '../../../Common/custombutton/CustomButton';
-import { Link } from 'react-router-dom';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
 
 const Login: React.FC = () => {
   const { formMethods, loading, onSubmit } = useLogin();
@@ -25,6 +25,17 @@ const Login: React.FC = () => {
               <p>
                 Empowering your academic journey with a modern campus experience.
               </p>
+              <div className="demo-credentials">
+                <p className="demo-credentials-title">Credentials</p>
+                <div className="demo-credentials-row">
+                  <span className="demo-credentials-label">Email</span>
+                  <span className="demo-credentials-value">collage-admin@yopmail.com</span>
+                </div>
+                <div className="demo-credentials-row">
+                  <span className="demo-credentials-label">Password</span>
+                  <span className="demo-credentials-value">12345678</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -74,9 +85,38 @@ const Login: React.FC = () => {
             </div>
           </div>
           <div className="log-copyrht">
-            <p>
-              ©2026 <Link to={''}>Bright College Hub</Link>, All Rights Reserved.
-            </p>
+            <p className="log-copyrht-name">Arpan Ghosh</p>
+            <div className="log-copyrht-links">
+              <a
+                href="https://www.linkedin.com/in/arpan-ghosh-998554270/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="log-copyrht-link"
+              >
+                <FaLinkedin className="log-copyrht-icon" />
+                LinkedIn
+              </a>
+              <span className="log-copyrht-divider" />
+              <a
+                href="https://github.com/ag333ghosh/Bright_College_Hub_Admin_React"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="log-copyrht-link"
+              >
+                <FaGithub className="log-copyrht-icon" />
+                Admin Panel
+              </a>
+              <span className="log-copyrht-divider" />
+              <a
+                href="https://github.com/ag333ghosh/Bright_College_Hub_App_NextJs_FullStack"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="log-copyrht-link"
+              >
+                <FaGithub className="log-copyrht-icon" />
+                User App
+              </a>
+            </div>
           </div>
         </div>
       </div>

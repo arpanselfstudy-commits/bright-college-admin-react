@@ -1482,30 +1482,40 @@ body .MuiIconButton-root.style-outline:hover {
 /*---------- Dashboard Footer ----------*/
 .footer-wrapper {
   margin-left: -50px;
-}
-.footer-wrapper {
   margin-right: -50px;
 }
 
 .footer-dash {
   background: var(--primary-color-light);
 }
-.footer-dash ul li {
-  position: relative;
-}
-.footer-dash ul li a {
+
+.footer-built-by {
+  font-size: 12px;
+  font-weight: 600;
   color: var(--muted-color-dark);
-  text-decoration: none;
+  white-space: nowrap;
 }
-.footer-dash ul li:not(:first-child):before {
-  content: '';
-  background: var(--muted-color-dark);
+
+.footer-social-link {
+  display: inline-flex !important;
+  align-items: center;
+  font-size: 12.5px !important;
+  font-weight: 500 !important;
+  color: var(--muted-color-dark) !important;
+  text-decoration: none !important;
+  transition: color 0.2s ease !important;
+}
+
+.footer-social-link:hover {
+  color: var(--clr-accent-blue, #05a0bf) !important;
+}
+
+.footer-dot {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  position: absolute;
-  left: -17px;
-  top: 11px;
+  background: var(--muted-color-dark);
+  opacity: 0.5;
 }
 /*---------- Dashboard Footer ----------*/
 
