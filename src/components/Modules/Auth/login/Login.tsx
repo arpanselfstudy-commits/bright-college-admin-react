@@ -23,7 +23,7 @@ const Login: React.FC = () => {
               <h3>Welcome to</h3>
               <h2 className="text-white text-4xl font-bold mb-4">Bright College Hub</h2>
               <p>
-                Empowering your academic journey with a modern campus experience.
+                Empowering your me academic journey with a modern campus experience.
               </p>
             </div>
           </div>
