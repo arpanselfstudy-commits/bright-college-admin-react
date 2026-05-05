@@ -98,23 +98,23 @@ const Login: React.FC = () => {
               </a>
               <span className="log-copyrht-divider" />
               <a
-                href="https://github.com/ag333ghosh/Bright_College_Hub_Admin_React"
+                href="https://github.com/arpanselfstudy-commits/bright-college-admin-react"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="log-copyrht-link"
               >
                 <FaGithub className="log-copyrht-icon" />
-                Admin Panel
+                Admin Panel Repo
               </a>
               <span className="log-copyrht-divider" />
               <a
-                href="https://github.com/ag333ghosh/Bright_College_Hub_App_NextJs_FullStack"
+                href="https://github.com/arpanselfstudy-commits/bright-college-hub-next"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="log-copyrht-link"
               >
                 <FaGithub className="log-copyrht-icon" />
-                User App
+                User App Repo
               </a>
             </div>
           </div>

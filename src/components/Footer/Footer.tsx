@@ -22,27 +22,27 @@ function Footer() {
           <li className="footer-dot" />
           <li>
             <Link
-              href="https://github.com/ag333ghosh/Bright_College_Hub_Admin_React"
+              href="https://github.com/arpanselfstudy-commits/bright-college-admin-react"
               target="_blank"
               rel="noopener noreferrer"
               className="footer-social-link"
               underline="none"
             >
               <FaGithub style={{ fontSize: 15, marginRight: 5, verticalAlign: 'middle' }} />
-              Admin Panel
+              Admin Panel Repo
             </Link>
           </li>
           <li className="footer-dot" />
           <li>
             <Link
-              href="https://github.com/ag333ghosh/Bright_College_Hub_App_NextJs_FullStack"
+              href="https://github.com/arpanselfstudy-commits/bright-college-hub-next"
               target="_blank"
               rel="noopener noreferrer"
               className="footer-social-link"
               underline="none"
             >
               <FaGithub style={{ fontSize: 15, marginRight: 5, verticalAlign: 'middle' }} />
-              User App
+              User App Repo
             </Link>
           </li>
         </ul>
