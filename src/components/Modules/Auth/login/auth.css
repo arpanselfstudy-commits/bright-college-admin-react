@@ -1,18 +1,32 @@
 @import '../../../../Index.css';
 
-/* ============ Login Page ============= */
-.log-reg-info-lt h3 {
-  font-size: 40px;
-  color: #fff;
+/* ============ Login Page — Desktop/Tablet (no scroll) ============= */
+html,
+body,
+#root {
+  height: 100%;
 }
 
 .log-Reg-Wrap {
   background: var(--clr-white);
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
 }
 
+.log-Reg-Wrap > .grid {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 !important;
+}
+
+/* ---- Left green panel ---- */
 .log-Reg-Wrap .logoReg-Bg {
   background: linear-gradient(135deg, var(--clr-blue) 0%, var(--clr-accent-blue) 100%);
-  min-height: 100vh;
+  height: 100%;
+  overflow: hidden;
 }
 
 .log-Reg-Wrap .logoReg-Bg .log-reg-lt {
@@ -20,76 +34,74 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 15px;
+  padding: 0 30px;
 }
 
 .log-Reg-Wrap .logoReg-Bg .log-reg-lt .log-reg-info-lt {
-  max-width: 520px;
-  margin: 0 auto;
+  max-width: 420px;
   text-align: center;
+}
+
+.log-reg-info-lt h3 {
+  font-size: 36px;
+  color: #fff;
 }
 
 .log-Reg-Wrap .logoReg-Bg .log-reg-lt .log-reg-info-lt h3 {
   color: var(--clr-white);
 }
 
-.log-Reg-Wrap .logoReg-Bg .log-reg-lt .log-reg-info-lt .text-logo {
-  margin: 0 0 40px;
-}
-
-.log-Reg-Wrap .logoReg-Bg .log-reg-lt .log-reg-info-lt .text-logo img {
-  margin: auto;
-}
-
 .log-Reg-Wrap .logoReg-Bg .log-reg-lt .log-reg-info-lt p {
   color: var(--clr-white);
 }
 
-.logright-content .log-copyrht {
-  position: absolute;
-  bottom: 15px;
-  left: 0;
-  right: 0;
+/* ---- Right panel ---- */
+.logright-content {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0 0 44px;
 }
 
 .log-Reg-Right {
-  padding: 40px 15px;
+  width: 100%;
+  padding: 12px 30px;
   text-align: center;
-}
-
-.logright-content {
-  position: relative;
-  padding-bottom: 46px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  overflow: hidden;
 }
 
 .log-Reg-Right .logo-log-Reg {
-  margin: 0 auto 60px;
-  max-width: 410px;
-}
-
-.log-Reg-Right .logo-log-Reg img {
-  margin: auto;
+  margin: 0 auto 10px;
+  max-width: 500px;
 }
 
 .log-Reg-Right .logo-log-Reg p {
   color: var(--clr-accent-blue);
+  font-size: 13px;
 }
 
 .log-Reg-Right .heading-block {
-  padding: 0 0 35px;
+  padding: 0 0 10px;
+}
+
+.log-Reg-Right .heading-block h1 {
+  font-size: 32px;
+  margin-bottom: 4px;
 }
 
 .log-Reg-Right .heading-block p {
   color: var(--clr-gray);
-  font-size: var(--f-size-S);
+  font-size: 13px;
+  line-height: 1.5;
 }
 
 .log-Reg-Right .form-main {
   margin: 0 auto;
-  max-width: 590px;
+  max-width: 500px;
   text-align: left;
 }
 
@@ -101,11 +113,19 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 0 0 35px;
+  margin: 0 0 14px;
 }
 
 .form-group {
-  margin: 0 0 25px;
+  margin: 0 0 14px;
+}
+
+/* ---- Copyright footer pinned to bottom ---- */
+.logright-content .log-copyrht {
+  position: absolute;
+  bottom: 8px;
+  left: 0;
+  right: 0;
 }
 
 .log-copyrht {
@@ -113,8 +133,111 @@
   text-align: center;
 }
 
-/* ============ Reset Password Page ============= */
+.log-copyrht-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--clr-dark-gray, #5a5a5a);
+  margin-bottom: 4px;
+  letter-spacing: 0.3px;
+}
 
+.log-copyrht-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.log-copyrht-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #5a5a5a;
+  text-decoration: none;
+  padding: 3px 10px;
+  border-radius: 20px;
+  border: 1px solid #e0e0e0;
+  background: #f9fafb;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.log-copyrht-link:hover {
+  background: #05a0bf;
+  color: #fff;
+  border-color: #05a0bf;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(5, 160, 191, 0.25);
+}
+
+.log-copyrht-icon {
+  font-size: 14px;
+}
+
+.log-copyrht-divider {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #d0d0d0;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* ============ Demo Credentials Box ============= */
+.demo-credentials {
+  background: rgba(45, 55, 72, 0.07);
+  border: 1px solid rgba(45, 55, 72, 0.14);
+  border-radius: 10px;
+  padding: 10px 18px;
+  text-align: left;
+  max-width: 500px;
+  margin: 0 auto 14px;
+}
+
+.demo-credentials-title {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: #6b7280;
+  margin-bottom: 10px;
+}
+
+.demo-credentials-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.demo-credentials-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.demo-credentials-label {
+  font-size: 12px;
+  color: #6b7280;
+  font-weight: 500;
+  flex-shrink: 0;
+  min-width: 64px;
+}
+
+.demo-credentials-value {
+  font-size: 13px;
+  color: #1f2937;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  word-break: break-all;
+  text-align: right;
+}
+
+/* ============ Reset Password Page ============= */
 .reset-pass-Wrap {
   min-height: 100vh;
   background: linear-gradient(135deg, var(--clr-blue) 0%, var(--clr-accent-blue) 100%);
@@ -177,110 +300,92 @@
   color: #0567a6;
 }
 
-.log-copyrht-name {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--clr-dark-gray, #5a5a5a);
-  margin-bottom: 8px;
-  letter-spacing: 0.3px;
-}
-
-.log-copyrht-links {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  flex-wrap: wrap;
-}
-
-.log-copyrht-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 12.5px;
-  font-weight: 500;
-  color: #5a5a5a;
-  text-decoration: none;
-  padding: 4px 10px;
-  border-radius: 20px;
-  border: 1px solid #e0e0e0;
-  background: #f9fafb;
-  transition: all 0.2s ease;
-}
-
-.log-copyrht-link:hover {
-  background: #05a0bf;
-  color: #fff;
-  border-color: #05a0bf;
-  transform: translateY(-1px);
-  box-shadow: 0 3px 10px rgba(5, 160, 191, 0.25);
-}
-
-.log-copyrht-icon {
-  font-size: 14px;
-}
-
-.log-copyrht-divider {
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: #d0d0d0;
-  display: inline-block;
-}
-
 .profile-setup-wrap {
   background: linear-gradient(135deg, var(--clr-blue) 0%, var(--clr-accent-blue) 100%);
 }
 
-/* ============ Demo Credentials Box ============= */
-.demo-credentials {
-  margin-top: 36px;
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  border-radius: 14px;
-  padding: 18px 22px;
-  backdrop-filter: blur(6px);
-  text-align: left;
-  max-width: 320px;
-  margin-left: auto;
-  margin-right: auto;
-}
+/* ============ Mobile Responsive (≤ 768px) ============= */
+@media (max-width: 768px) {
+  html,
+  body,
+  #root {
+    height: auto;
+    overflow: auto;
+  }
 
-.demo-credentials-title {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.65);
-  margin-bottom: 12px;
-}
+  .log-Reg-Wrap {
+    height: auto;
+    overflow: visible;
+    min-height: 100vh;
+    display: block;
+  }
 
-.demo-credentials-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 6px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
+  .log-Reg-Wrap > .grid {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
 
-.demo-credentials-row:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
-}
+  /* Left green panel — compact banner on mobile */
+  .log-Reg-Wrap .logoReg-Bg {
+    height: auto;
+    min-height: unset;
+    padding: 36px 24px;
+    overflow: visible;
+  }
 
-.demo-credentials-label {
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.6);
-  font-weight: 500;
-  min-width: 64px;
-}
+  .log-Reg-Wrap .logoReg-Bg .log-reg-lt {
+    height: auto;
+    padding: 0;
+  }
 
-.demo-credentials-value {
-  font-size: 13px;
-  color: #fff;
-  font-weight: 600;
-  letter-spacing: 0.2px;
-  word-break: break-all;
-  text-align: right;
+  .log-reg-info-lt h3 {
+    font-size: 24px;
+  }
+
+  .log-reg-info-lt h2 {
+    font-size: 26px !important;
+  }
+
+  /* Right panel — natural flow on mobile */
+  .logright-content {
+    height: auto;
+    overflow: visible;
+    padding: 0 0 24px;
+    display: block;
+  }
+
+  .log-Reg-Right {
+    padding: 28px 20px 16px;
+  }
+
+  .log-Reg-Right .logo-log-Reg {
+    margin-bottom: 14px;
+  }
+
+  .log-Reg-Right .heading-block {
+    padding-bottom: 14px;
+  }
+
+  .log-Reg-Right .heading-block h1 {
+    font-size: 26px;
+  }
+
+  .log-Reg-Right .heading-block p br {
+    display: none;
+  }
+
+  .log-Reg-Right .form-main {
+    max-width: 100%;
+  }
+
+  .demo-credentials {
+    max-width: 100%;
+  }
+
+  /* Copyright — natural flow, not absolute */
+  .logright-content .log-copyrht {
+    position: static;
+    margin-top: 20px;
+    padding: 0 20px 24px;
+  }
 }

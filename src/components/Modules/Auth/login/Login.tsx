@@ -15,7 +15,7 @@ const Login: React.FC = () => {
 
   return (
     <section className="log-Reg-Wrap">
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 h-full" style={{ gap: 0 }}>
         {/* Left Side Logo and Info */}
         <div className="logoReg-Bg">
           <div className="log-reg-lt">
@@ -25,17 +25,6 @@ const Login: React.FC = () => {
               <p>
                 Empowering your academic journey with a modern campus experience.
               </p>
-              <div className="demo-credentials">
-                <p className="demo-credentials-title">Credentials</p>
-                <div className="demo-credentials-row">
-                  <span className="demo-credentials-label">Email</span>
-                  <span className="demo-credentials-value">collage-admin@yopmail.com</span>
-                </div>
-                <div className="demo-credentials-row">
-                  <span className="demo-credentials-label">Password</span>
-                  <span className="demo-credentials-value">12345678</span>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -48,9 +37,20 @@ const Login: React.FC = () => {
             <div className="heading-block">
               <h1>Login</h1>
               <p>
-                Connect with your campus, manage tasks, and <br />
-                stay updated effortlessly.
+                Connect with your campus, manage tasks, and stay updated effortlessly.
               </p>
+            </div>
+            {/* Credentials box — after heading/subtext, before inputs */}
+            <div className="demo-credentials">
+              <p className="demo-credentials-title">Credentials</p>
+              <div className="demo-credentials-row">
+                <span className="demo-credentials-label">Email</span>
+                <span className="demo-credentials-value">collage-admin@yopmail.com</span>
+              </div>
+              <div className="demo-credentials-row">
+                <span className="demo-credentials-label">Password</span>
+                <span className="demo-credentials-value">12345678</span>
+              </div>
             </div>
             <div className="form-main">
               <form onSubmit={onSubmit}>

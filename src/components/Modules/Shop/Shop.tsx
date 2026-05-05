@@ -82,7 +82,7 @@ const Shop = () => {
 
   return (
     <div className="dashboardholder">
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "12px", marginTop: "8px" }}>
+      <div className="page-toolbar">
         <SearchInput
           placeholder="Search by shop name, location..."
           onSearch={handleSearch}

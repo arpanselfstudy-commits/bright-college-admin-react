@@ -109,7 +109,7 @@ const Job = () => {
 
   return (
     <div className="dashboardholder">
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "12px", marginTop: "8px" }}>
+      <div className="page-toolbar">
         <SearchInput
           placeholder="Search by job name, location..."
           onSearch={handleSearch}

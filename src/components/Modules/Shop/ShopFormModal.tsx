@@ -194,9 +194,9 @@ const ShopFormModal = ({ open, onClose, onSaved, editShop }: ShopFormModalProps)
             {DAYS.map((day) => {
               const isOpen = watch(`shopTiming.${day}.isOpen`);
               return (
-                <div key={day} style={{ display: "grid", gridTemplateColumns: "110px 1fr 1fr 1fr", alignItems: "center", gap: "12px", background: isOpen ? "var(--primary-color-light)" : "#f9f9f9", borderRadius: "10px", padding: "10px 14px", border: "1px solid var(--border-color)" }}>
+                <div key={day} className="shop-timing-row" style={{ background: isOpen ? "var(--primary-color-light)" : "#f9f9f9", borderRadius: "10px", padding: "10px 14px", border: "1px solid var(--border-color)" }}>
                   {/* Day label + toggle */}
-                  <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "8px", minWidth: "100px" }}>
                     <label style={{ position: "relative", display: "inline-flex", alignItems: "center", cursor: "pointer" }}>
                       <input type="checkbox" {...register(`shopTiming.${day}.isOpen`)}
                         style={{ opacity: 0, width: 0, height: 0, position: "absolute" }}

@@ -485,9 +485,6 @@ hr {
     padding-left: 20px;
     padding-right: 20px;
   }
-  .dashboard-content-wrap {
-    min-height: calc(100vh - 240px);
-  }
   .dashboard-title {
     flex-direction: column;
     align-items: flex-start;
@@ -1226,17 +1223,48 @@ ul.time-schedule li:hover {
   min-width: 0;
   padding-left: 50px;
   padding-right: 50px;
-  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.dashboard-content-wrap {
+  flex: 1;
 }
 
 /*---------- Dashboard Header ----------*/
 .dashboard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   padding: 20px 0;
   border-bottom: 1px solid var(--border-color);
   position: sticky;
   top: 0;
   background-color: var(--bg-color);
   z-index: 999;
+  gap: 12px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+  min-width: 0;
+}
+
+.header-page-title {
+  margin: 0 !important;
+  font-weight: 600;
+  color: var(--primary-color-dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dashboard-header-title {
+  flex-shrink: 0;
 }
 
 .dashboard-header-title h2 {
@@ -1881,7 +1909,7 @@ body .MuiIconButton-root.style-outline:hover {
     z-index: 2000 !important;
     transform: translateX(-100%);
     visibility: hidden;
-    background-color: #0567a6 !important;
+    background-color: #64bfa4 !important;
     box-shadow: 5px 0 15px rgba(0,0,0,0.1);
   }
 
@@ -1992,7 +2020,10 @@ body .MuiIconButton-root.style-outline:hover {
 /* Custom Table */
 .dash-table-outer-wrap {
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   position: relative;
+  /* Ensure table scroll works even inside flex containers */
+  max-width: 100%;
 }
 .custom-table {
   border-collapse: separate;
@@ -2552,8 +2583,70 @@ input.search-box {
 .db-dashboard-wrap {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 80px);
+  height: auto;
   padding-bottom: 0;
+}
+
+.dashboardholder {
+  padding-top: 20px;
+}
+
+/* Shop Timing Row */
+.shop-timing-row {
+  display: grid;
+  grid-template-columns: 110px 60px 1fr 1fr;
+  align-items: center;
+  gap: 12px;
+}
+
+@media only screen and (max-width: 600px) {
+  .shop-timing-row {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 8px;
+  }
+
+  .shop-timing-row > div:first-child {
+    grid-column: 1 / 2;
+  }
+
+  .shop-timing-row > span {
+    grid-column: 2 / 3;
+    text-align: right;
+  }
+
+  .shop-timing-row > div:nth-child(3),
+  .shop-timing-row > div:nth-child(4) {
+    grid-column: span 1;
+  }
+}
+
+/* Search + Add button toolbar row */
+.page-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+.page-toolbar > *:first-child {
+  flex: 1;
+  min-width: 200px;
+  max-width: 320px;
+}
+
+@media only screen and (max-width: 767px) {
+  .page-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .page-toolbar > *:first-child {
+    max-width: 100%;
+  }
 }
 
 .db-cards-grid {
@@ -2646,4 +2739,368 @@ input.search-box {
   }
   .db-stat-value { font-size: 36px; }
   .db-dashboard-wrap { height: auto; }
+}
+
+/* ============ COMPREHENSIVE RESPONSIVE DESIGN ============ */
+
+/* ---- Tablet (768px - 1199px) ---- */
+@media only screen and (min-width: 768px) and (max-width: 1199px) {
+  .dashboard-content-col {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .dashboard-header-title .h3 {
+    font-size: 18px;
+  }
+
+  .custom-table {
+    min-width: 800px;
+  }
+
+  .footer-dash {
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .footer-dash ul {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+/* ---- Mobile + Tablet (< 1199px) — Sidebar as overlay ---- */
+@media only screen and (max-width: 1199px) {
+  /* Sidebar: fixed overlay, hidden off-screen by default */
+  .dashboard-layout .sidebar {
+    position: fixed !important;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 260px !important;
+    max-width: 80vw !important;
+    z-index: 2000 !important;
+    transform: translateX(-100%);
+    visibility: hidden;
+    background-color: #64bfa4 !important;
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, visibility 0.3s ease;
+    overflow-y: auto;
+    height: 100vh !important;
+  }
+
+  /* Sidebar open state */
+  .dashboard-layout.sidebar-toggled .sidebar {
+    transform: translateX(0) !important;
+    visibility: visible !important;
+  }
+
+  /* Content col takes full width since sidebar is out of flow */
+  .dashboard-content-col {
+    width: 100% !important;
+    flex: 1 !important;
+  }
+
+  /* Close button inside sidebar */
+  .sidebar-close {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    font-size: 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-bottom: 16px;
+    flex-shrink: 0;
+  }
+
+  /* Overlay behind sidebar */
+  .menu-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 1999;
+  }
+}
+
+/* ---- Mobile (< 768px) ---- */
+@media only screen and (max-width: 767px) {
+  /* Content padding */
+  .dashboard-content-col {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    overflow-x: visible;
+  }
+
+  /* Header — single row: hamburger | title ... welcome */
+  .dashboard-header {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    flex-wrap: nowrap !important;
+    padding: 12px 0 !important;
+    gap: 8px;
+  }
+
+  .dashboard-header > div:first-child {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .dashboard-header > div:first-child .h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--primary-color-dark);
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .dashboard-header-title {
+    flex-shrink: 0;
+  }
+
+  .dashboard-header-title .h3 {
+    font-size: 13px;
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  .dashboard-header-title .h3 span {
+    font-size: 13px;
+  }
+
+  /* Dashboard cards — 2 columns on mobile */
+  .db-cards-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-rows: none !important;
+    gap: 12px !important;
+  }
+
+  .db-stat-card {
+    padding: 16px 14px;
+    border-radius: 12px;
+  }
+
+  .db-stat-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+  }
+
+  .db-stat-icon svg {
+    width: 22px !important;
+    height: 22px !important;
+  }
+
+  .db-stat-bottom {
+    margin-top: 12px;
+  }
+
+  .db-stat-label {
+    font-size: 12px;
+    margin-bottom: 4px;
+  }
+
+  .db-stat-value {
+    font-size: 28px;
+  }
+
+  /* Tables — horizontal scroll */
+  .dash-table-outer-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .custom-table {
+    min-width: 600px;
+    font-size: 13px;
+  }
+
+  .custom-table tr td,
+  .custom-table tr th {
+    padding: 10px 8px;
+    white-space: nowrap;
+  }
+
+  .custom-table tr td:first-child,
+  .custom-table tr th:first-child {
+    padding-left: 12px;
+  }
+
+  .custom-table tr td:last-child,
+  .custom-table tr th:last-child {
+    padding-right: 12px;
+  }
+
+  /* Toolbar (search + add button) */
+  .page-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .page-toolbar > *:first-child {
+    max-width: 100%;
+  }
+
+  /* Buttons */
+  .MuiButtonBase-root.btn {
+    min-height: 44px;
+    font-size: 14px;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .btn .btn-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+    margin-left: auto;
+  }
+
+  /* Modals — full width, single column forms */
+  .MuiDialog-paper {
+    margin: 8px !important;
+    max-width: calc(100vw - 16px) !important;
+    width: 100% !important;
+    max-height: calc(100vh - 16px) !important;
+    border-radius: 14px !important;
+  }
+
+  /* Collapse all 2-col grids inside dialogs to 1 col on mobile */
+  .MuiDialog-paper .grid-cols-2,
+  .MuiDialog-paper [class*="grid-cols-2"],
+  .MuiDialog-paper .grid.grid-cols-2 {
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+  }
+
+  .MuiDialog-paper .form-group {
+    margin-bottom: 12px !important;
+  }
+
+  .MuiDialog-paper .form-control {
+    height: 42px;
+    font-size: 14px;
+  }
+
+  .MuiDialog-paper textarea.form-control {
+    height: 80px;
+  }
+
+  /* Modal header + body padding */
+  .MuiDialog-paper > div:first-child {
+    padding: 14px 16px !important;
+  }
+
+  .MuiDialogContent-root {
+    padding: 14px 16px !important;
+  }
+  .footer-wrapper {
+    margin-left: -16px;
+    margin-right: -16px;
+  }
+
+  .footer-dash {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 14px 16px !important;
+    text-align: center;
+  }
+
+  .footer-built-by {
+    font-size: 11px;
+  }
+
+  .footer-dash ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px !important;
+  }
+
+  .footer-dot {
+    display: none;
+  }
+
+  .footer-social-link {
+    font-size: 11px !important;
+  }
+
+  /* Pagination */
+  .dash-table-outer-wrap + div {
+    flex-direction: column;
+    align-items: center !important;
+    gap: 10px !important;
+    margin-top: 12px !important;
+  }
+
+  .dash-table-outer-wrap + div > div {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px !important;
+  }
+
+  /* Content wrap */
+  .dashboard-content-wrap {
+    padding-bottom: 16px;
+  }
+
+  .dashboardholder {
+    padding-top: 16px;
+  }
+}
+
+/* ---- Small Mobile (< 480px) ---- */
+@media only screen and (max-width: 479px) {
+  .dashboard-content-col {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+    overflow-x: visible;
+  }
+
+  .db-cards-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+  }
+
+  .db-stat-card {
+    padding: 14px 12px;
+  }
+
+  .db-stat-value {
+    font-size: 24px;
+  }
+
+  .db-stat-label {
+    font-size: 11px;
+  }
+
+  .db-stat-icon {
+    width: 38px;
+    height: 38px;
+  }
+
+  .dashboard-header-title .h3 {
+    font-size: 12px;
+  }
+
+  .dashboard-header > div:first-child .h3 {
+    font-size: 14px;
+  }
+
+  .footer-dash {
+    padding: 12px !important;
+  }
 }

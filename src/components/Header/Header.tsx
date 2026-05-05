@@ -21,9 +21,9 @@ const Header = ({ toggleSidebar, isSidebarToggled }: HeaderProps) => {
   const pageTitle = ROUTE_TITLES[pathname] ?? '';
 
   return (
-    <header className="dashboard-header flex justify-between items-center">
+    <header className="dashboard-header">
       {/* Left: hamburger + page title */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+      <div className="header-left">
         <div className="hamburger-nav" onClick={toggleSidebar}>
           <svg className={`ham ham6 ${isSidebarToggled ? 'active' : ''}`} viewBox="0 0 100 100" width="80">
             <path
@@ -41,7 +41,7 @@ const Header = ({ toggleSidebar, isSidebarToggled }: HeaderProps) => {
           </svg>
         </div>
         {pageTitle && (
-          <h2 className="h3" style={{ margin: 0, fontWeight: 600, color: 'var(--primary-color-dark)' }}>
+          <h2 className="h3 header-page-title">
             {pageTitle}
           </h2>
         )}

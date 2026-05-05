@@ -28,7 +28,7 @@ const SearchInput = ({
   }, [value]);
 
   return (
-    <div style={{ position: "relative", display: "inline-flex", alignItems: "center" }}>
+    <div style={{ position: "relative", display: "inline-flex", alignItems: "center", width: "100%", maxWidth: "320px" }}>
       <svg
         style={{ position: "absolute", left: "12px", color: "#a1a1a1", flexShrink: 0 }}
         width="16" height="16" viewBox="0 0 24 24" fill="none"
@@ -52,7 +52,7 @@ const SearchInput = ({
           fontSize: "14px",
           color: "var(--clr-dark-gray)",
           outline: "none",
-          width: "280px",
+          width: "100%",
           transition: "border-color 0.2s",
         }}
         onFocus={(e) => (e.currentTarget.style.borderColor = "var(--clr-primary)")}
