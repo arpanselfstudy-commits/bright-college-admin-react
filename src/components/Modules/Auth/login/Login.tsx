@@ -82,40 +82,41 @@ const Login: React.FC = () => {
                   />
                 </div>
               </form>
-            </div>
-          </div>
-          <div className="log-copyrht">
-            <p className="log-copyrht-name">Arpan Ghosh</p>
-            <div className="log-copyrht-links">
-              <a
-                href="https://www.linkedin.com/in/arpan-ghosh-998554270/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="log-copyrht-link"
-              >
-                <FaLinkedin className="log-copyrht-icon" />
-                LinkedIn
-              </a>
-              <span className="log-copyrht-divider" />
-              <a
-                href="https://github.com/arpanselfstudy-commits/bright-college-admin-react"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="log-copyrht-link"
-              >
-                <FaGithub className="log-copyrht-icon" />
-                Admin Panel Repo
-              </a>
-              <span className="log-copyrht-divider" />
-              <a
-                href="https://github.com/arpanselfstudy-commits/bright-college-hub-next"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="log-copyrht-link"
-              >
-                <FaGithub className="log-copyrht-icon" />
-                User App Repo
-              </a>
+              {/* Author links — immediately below the login button */}
+              <div className="log-copyrht log-copyrht-inline">
+                <p className="log-copyrht-name">Arpan Ghosh</p>
+                <div className="log-copyrht-links">
+                  <a
+                    href="https://www.linkedin.com/in/arpan-ghosh-998554270/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="log-copyrht-link"
+                  >
+                    <FaLinkedin className="log-copyrht-icon" />
+                    LinkedIn
+                  </a>
+                  <span className="log-copyrht-divider" />
+                  <a
+                    href="https://github.com/arpanselfstudy-commits/bright-college-admin-react"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="log-copyrht-link"
+                  >
+                    <FaGithub className="log-copyrht-icon" />
+                    Admin Panel Repo
+                  </a>
+                  <span className="log-copyrht-divider" />
+                  <a
+                    href="https://github.com/arpanselfstudy-commits/bright-college-hub-next"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="log-copyrht-link"
+                  >
+                    <FaGithub className="log-copyrht-icon" />
+                    User App Repo
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>

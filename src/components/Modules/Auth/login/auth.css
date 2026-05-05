@@ -64,7 +64,6 @@ body,
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  padding: 0 0 44px;
 }
 
 .log-Reg-Right {
@@ -120,12 +119,9 @@ body,
   margin: 0 0 14px;
 }
 
-/* ---- Copyright footer pinned to bottom ---- */
-.logright-content .log-copyrht {
-  position: absolute;
-  bottom: 8px;
-  left: 0;
-  right: 0;
+/* ---- Author links inline below login button ---- */
+.log-copyrht-inline {
+  margin-top: 25px;
 }
 
 .log-copyrht {
@@ -134,6 +130,7 @@ body,
 }
 
 .log-copyrht-name {
+  margin-top: 15px;
   font-size: 12px;
   font-weight: 600;
   color: var(--clr-dark-gray, #5a5a5a);
@@ -382,10 +379,9 @@ body,
     max-width: 100%;
   }
 
-  /* Copyright — natural flow, not absolute */
+  /* Copyright — natural flow on mobile */
   .logright-content .log-copyrht {
-    position: static;
-    margin-top: 20px;
+    margin-top: 0;
     padding: 0 20px 24px;
   }
 }
