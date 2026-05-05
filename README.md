@@ -1,5 +1,18 @@
 # Bright College Hub — Admin Panel
 
+## Lighthouse Report
+
+| Category | Score |
+|---|---|
+| 🟢 Performance | 100 / 100 |
+| 🟢 Accessibility | 100 / 100 |
+| 🟢 Best Practices | 96 / 100 |
+| 🟡 SEO | 82 / 100 |
+
+> Scores measured on the live production build via [Google Lighthouse](https://developer.chrome.com/docs/lighthouse/overview/).
+
+---
+
 **Live Demo:** [https://bright-college-admin-react.vercel.app/](https://bright-college-admin-react.vercel.app/)
 
 > Login with: `collage-admin@yopmail.com` / `12345678`
