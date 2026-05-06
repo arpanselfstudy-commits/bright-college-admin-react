@@ -1,26 +1,34 @@
 import { useEffect } from "react";
-import { Navigate, Outlet, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Navigate, Outlet } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import toast from "react-hot-toast";
 import { RootState } from "../../../store/store";
+import { clearSessionMessage } from "../../../store/auth.store";
 
-const ProtectedRoute = () => {
-  const isLoggedIn = useSelector((state: RootState) => state.authSlice.isLoggedIn);
-  const token = localStorage.getItem("accessToken");
-  const navigate = useNavigate();
-  const isAuthenticated = isLoggedIn || !!token;
+export const ProtectedRoute = () => {
+  const dispatch = useDispatch();
+  const { isLoggedIn, sessionExpiredMessage } = useSelector(
+    (state: RootState) => state.authSlice
+  );
 
-  // Push a history entry so the back button can't go back to protected pages
   useEffect(() => {
-    if (!isAuthenticated) {
-      navigate("/login", { replace: true });
+    if (!isLoggedIn && sessionExpiredMessage) {
+      toast.error(sessionExpiredMessage);
+      dispatch(clearSessionMessage());
     }
-  }, [isAuthenticated, navigate]);
+  }, [isLoggedIn, sessionExpiredMessage, dispatch]);
 
-  if (!isAuthenticated) {
+  if (!isLoggedIn) {
     return <Navigate to="/login" replace />;
   }
 
   return <Outlet />;
+};
+
+// Redirects already-authenticated users away from public pages like /login.
+export const PublicRoute = ({ children }: { children: React.ReactNode }) => {
+  const isLoggedIn = useSelector((state: RootState) => state.authSlice.isLoggedIn);
+  return isLoggedIn ? <Navigate to="/dashboard" replace /> : <>{children}</>;
 };
 
 export default ProtectedRoute;

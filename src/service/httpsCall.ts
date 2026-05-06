@@ -1,5 +1,4 @@
 import axios from "axios";
-import { emitLogout } from "./authEvents";
 
 const baseURL = import.meta.env.VITE_BASE_URL;
 
@@ -16,9 +15,13 @@ api.interceptors.response.use(
     const originalRequest = error.config;
     const errorCode = error.response?.data?.errorCode;
 
+    // Lazy import avoids circular dependency (store → authSlice → AuthApi → httpsCall → store)
+    const { store } = await import("../store/store");
+    const { forceLogout } = await import("../store/auth.store");
+
     // TOKEN_REUSE: all sessions revoked — force logout immediately
     if (errorCode === "TOKEN_REUSE") {
-      emitLogout();
+      store.dispatch(forceLogout("Your session was revoked. Please log in again."));
       return Promise.reject(error);
     }
 
@@ -33,7 +36,7 @@ api.interceptors.response.use(
         await api.post("/auth/refresh");
         return api(originalRequest);
       } catch {
-        emitLogout();
+        store.dispatch(forceLogout("Session expired. Please log in again."));
         return Promise.reject(error);
       }
     }

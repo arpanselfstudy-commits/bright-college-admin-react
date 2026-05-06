@@ -1,13 +1,12 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import toast from "react-hot-toast";
-import AuthApi from "../../../../service/apis/Auth.api";
 import { LoginRequest } from "../../../../types/authTypes";
-import { useDispatch } from "react-redux";
-import { login } from "../../../../store/auth.store";
+import { useDispatch, useSelector } from "react-redux";
+import { loginThunk } from "../../../../store/auth.store";
+import { AppDispatch, RootState } from "../../../../store/store";
 
 const initialValues: LoginRequest = {
   email: "",
@@ -24,8 +23,8 @@ const loginSchema = Yup.object().shape({
 
 const useLogin = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch<AppDispatch>();
+  const loading = useSelector((state: RootState) => state.authSlice.loading);
 
   const formMethods = useForm<LoginRequest>({
     defaultValues: initialValues,
@@ -36,25 +35,12 @@ const useLogin = () => {
   const { handleSubmit } = formMethods;
 
   const onSubmit: SubmitHandler<LoginRequest> = async (data) => {
-    setLoading(true);
-    try {
-      const response = await AuthApi.login(data);
-      if (response.success || response.code === 200) {
-        if (response.data?.role !== "ADMIN") {
-          toast.error("Access denied. Please use admin credentials to login.");
-          return;
-        }
-        dispatch(login(response.data));
-        toast.success("Logged in successfully");
-        navigate("/dashboard");
-      } else {
-        toast.error(response.message || "Login failed");
-      }
-    } catch (error: any) {
-      const message = error?.response?.data?.message || "Login failed. Please try again.";
-      toast.error(message);
-    } finally {
-      setLoading(false);
+    const result = await dispatch(loginThunk(data));
+    if (loginThunk.fulfilled.match(result)) {
+      toast.success("Logged in successfully");
+      navigate("/dashboard", { replace: true });
+    } else {
+      toast.error((result.payload as string) || "Login failed. Please try again.");
     }
   };
 

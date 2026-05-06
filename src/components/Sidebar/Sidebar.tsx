@@ -5,9 +5,9 @@ import { IoMdLogOut } from 'react-icons/io';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import toast from 'react-hot-toast';
-import { logout } from '../../store/auth.store';
+import { logoutThunk } from '../../store/auth.store';
+import { AppDispatch } from '../../store/store';
 import ConfirmModal from '../Common/ConfirmModal/ConfirmModal';
-import AuthApi from '../../service/apis/Auth.api';
 
 interface SidebarProps {
   toggleSidebar: () => void;
@@ -15,17 +15,14 @@ interface SidebarProps {
 
 const Sidebar = ({ toggleSidebar }: SidebarProps) => {
   const [showLogoutModal, setShowLogoutModal] = useState(false);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
   const handleLogoutConfirm = async () => {
-    try {
-      await AuthApi.logout();
-      dispatch(logout());
+    const result = await dispatch(logoutThunk());
+    if (logoutThunk.fulfilled.match(result) || logoutThunk.rejected.match(result)) {
       toast.success('Logged out successfully');
       navigate('/login');
-    } catch {
-      toast.error('Something went wrong.');
     }
   };
 
