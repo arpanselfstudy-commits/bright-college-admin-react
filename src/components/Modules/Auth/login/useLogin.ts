@@ -40,6 +40,10 @@ const useLogin = () => {
     try {
       const response = await AuthApi.login(data);
       if (response.success || response.code === 200) {
+        if (response.data?.role !== "ADMIN") {
+          toast.error("Access denied. Please use admin credentials to login.");
+          return;
+        }
         dispatch(login(response.data));
         toast.success("Logged in successfully");
         navigate("/dashboard");
