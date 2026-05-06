@@ -28,7 +28,7 @@ A production-ready admin panel built with React + TypeScript. This project was b
 
 **What the admin can do:**
 - Log in securely with email and password
-- View a dashboard with key stats at a glance
+- View a dashboard with key stats at a glance and log list of user login and logout with chart view.
 - Manage **Shop listings** — create, edit, delete, paginate, search
 - Manage **Job listings** — create, edit, delete with rich form fields
 - Manage **CMS content** — create and edit content with a rich text editor
