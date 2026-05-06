@@ -29,20 +29,36 @@ const schema = Yup.object().shape({
     .required("Job type is required"),
   deadline: Yup.string().required("Deadline is required"),
   location: Yup.string().trim().required("Location is required"),
-  experience: Yup.number().min(0, "Must be 0 or more").required("Experience is required"),
-  salaryFrom: Yup.number().min(0, "Must be 0 or more").required("Salary from is required"),
+  experience: Yup.number()
+    .typeError("Experience must be a number")
+    .min(0, "Must be 0 or more")
+    .required("Experience is required"),
+  salaryFrom: Yup.number()
+    .typeError("Salary must be a number")
+    .min(0, "Must be 0 or more")
+    .required("Salary from is required"),
   salaryTo: Yup.number()
+    .typeError("Salary must be a number")
     .min(0, "Must be 0 or more")
     .required("Salary to is required")
     .test("salary-range", "Salary to must be ≥ salary from", function (val) {
       return val >= this.parent.salaryFrom;
     }),
-  jobDescription: Yup.string().trim().required("Job description is required"),
+  jobDescription: Yup.string()
+    .trim()
+    .min(10, "Description must be at least 10 characters")
+    .required("Job description is required"),
   responsibilities: Yup.array()
-    .of(Yup.object().shape({ value: Yup.string().trim().required("Cannot be empty") }))
-    .min(1, "Add at least one responsibility"),
-  contactEmail: Yup.string().trim().email("Enter a valid email").required("Contact email is required"),
-  contactPhone: Yup.string().trim().required("Contact phone is required"),
+    .of(Yup.object().shape({ value: Yup.string().trim().required("Responsibility cannot be empty") }))
+    .min(1, "At least one responsibility is required"),
+  contactEmail: Yup.string()
+    .trim()
+    .email("Enter a valid email address")
+    .required("Contact email is required"),
+  contactPhone: Yup.string()
+    .trim()
+    .matches(/^\d{10}$/, "Phone number must be exactly 10 digits")
+    .required("Contact phone is required"),
 });
 
 const emptyDefaults: JobFormValues = {
@@ -51,9 +67,9 @@ const emptyDefaults: JobFormValues = {
   type: "full-time" as JobType,
   deadline: "",
   location: "",
-  experience: 0,
-  salaryFrom: 0,
-  salaryTo: 0,
+  experience: "" as any,
+  salaryFrom: "" as any,
+  salaryTo: "" as any,
   jobDescription: "",
   responsibilities: [{ value: "" }],
   contactEmail: "",

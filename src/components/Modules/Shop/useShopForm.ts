@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useForm, SubmitHandler, useFieldArray } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import toast from "react-hot-toast";
@@ -11,6 +11,8 @@ export interface ShopFormValues {
   type: string;
   location: string;
   distance: string;
+  photo: string;
+  poster: string;
   contactEmail: string;
   contactPhone: string;
   photos: string[];
@@ -37,12 +39,28 @@ const schema = Yup.object().shape({
   name: Yup.string().trim().required("Shop name is required"),
   type: Yup.string().trim().required("Shop type is required"),
   location: Yup.string().trim().required("Location is required"),
-  distance: Yup.string().trim(),
-  contactEmail: Yup.string().trim().email("Enter a valid email").required("Contact email is required"),
-  contactPhone: Yup.string().trim().required("Contact phone is required"),
-  photos: Yup.array().of(Yup.string().trim().url("Enter a valid URL")),
-  topItems: Yup.array().of(Yup.string().trim()),
-  allItems: Yup.array().of(Yup.string().trim()),
+  distance: Yup.string().trim().required("Distance is required"),
+  photo: Yup.string().trim(), // optional
+  poster: Yup.string().trim(), // optional
+  contactEmail: Yup.string()
+    .trim()
+    .email("Enter a valid email address")
+    .required("Contact email is required"),
+  contactPhone: Yup.string()
+    .trim()
+    .matches(/^\d{10}$/, "Phone number must be exactly 10 digits")
+    .required("Contact phone is required"),
+  photos: Yup.array().of(
+    Yup.string()
+      .trim()
+      .test("url-or-empty", "Enter a valid URL (must start with http:// or https://)", (val) =>
+        !val || /^https?:\/\/.+/.test(val)
+      )
+  ), // optional — but validated if provided
+  topItems: Yup.array().of(Yup.string().trim()), // optional
+  allItems: Yup.array()
+    .of(Yup.string().trim().required("Item name cannot be empty"))
+    .min(1, "At least one item is required"),
   shopTiming: Yup.object().shape({
     monday: dayTimingSchema,
     tuesday: dayTimingSchema,
@@ -62,6 +80,8 @@ const emptyDefaults: ShopFormValues = {
   type: "",
   location: "",
   distance: "",
+  photo: "",
+  poster: "",
   contactEmail: "",
   contactPhone: "",
   photos: [],
@@ -83,6 +103,8 @@ const shopToFormValues = (shop: Shop): ShopFormValues => ({
   type: shop.type || "",
   location: shop.location || "",
   distance: shop.distance || "",
+  photo: shop.photo || "",
+  poster: shop.poster || "",
   contactEmail: shop.contactDetails?.email || "",
   contactPhone: shop.contactDetails?.phoneNo || "",
   photos: shop.photos || [],
@@ -109,7 +131,7 @@ const useShopForm = (onSuccess: () => void, editShop?: Shop | null) => {
     mode: "onTouched",
   });
 
-  const { handleSubmit, reset, control } = formMethods;
+  const { handleSubmit, reset } = formMethods;
 
   useEffect(() => {
     reset(editShop ? shopToFormValues(editShop) : emptyDefaults);
@@ -123,15 +145,17 @@ const useShopForm = (onSuccess: () => void, editShop?: Shop | null) => {
         type: data.type,
         location: data.location,
         distance: data.distance,
-        photos: data.photos,
-        topItems: data.topItems,
-        allItems: data.allItems,
+        photo: data.photo || "",
+        poster: data.poster || "",
+        photos: data.photos.filter((p) => p.trim() !== ""),
+        topItems: data.topItems.filter((t) => t.trim() !== ""),
+        allItems: data.allItems.filter((a) => a.trim() !== ""),
         contactDetails: { email: data.contactEmail, phoneNo: data.contactPhone },
         shopTiming: data.shopTiming,
       };
 
       if (isEdit && editShop) {
-        const payload: UpdateShopPayload = { ...base, shopId: editShop.shopId } as UpdateShopPayload;
+        const payload: UpdateShopPayload = { ...base, _id: editShop._id };
         const res = await ShopApi.updateShop(editShop._id, payload);
         if (res.success) {
           toast.success("Shop updated successfully");
@@ -141,7 +165,7 @@ const useShopForm = (onSuccess: () => void, editShop?: Shop | null) => {
           toast.error(res.message || "Failed to update shop");
         }
       } else {
-        const payload: CreateShopPayload = { ...base, _id: "" };
+        const payload: CreateShopPayload = { ...base };
         const res = await ShopApi.createShop(payload);
         if (res.success) {
           toast.success("Shop created successfully");

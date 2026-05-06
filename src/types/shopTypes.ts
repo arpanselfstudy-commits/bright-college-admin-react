@@ -63,5 +63,5 @@ export interface ShopListParams {
   search?: string;
 }
 
-export type CreateShopPayload = Omit<Shop, "shopId">;
-export type UpdateShopPayload = Shop;
+export type CreateShopPayload = Omit<Shop, "_id" | "shopId">;
+export type UpdateShopPayload = Omit<Shop, "shopId">;

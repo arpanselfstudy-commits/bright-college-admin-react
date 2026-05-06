@@ -110,32 +110,45 @@ const ShopFormModal = ({ open, onClose, onSaved, editShop }: ShopFormModalProps)
           <div className="grid grid-cols-2 gap-4">
             <FormField label="Location" name="location" placeholder="e.g. 1st Floor, Main Campus" required
               register={register("location")} error={errors.location?.message} />
-            <FormField label="Distance" name="distance" placeholder="e.g. 10m away"
+            <FormField label="Distance" name="distance" placeholder="e.g. 10m away" required
               register={register("distance")} error={errors.distance?.message} />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <FormField label="Contact Email" name="contactEmail" type="email" placeholder="shop@example.com" required
               register={register("contactEmail")} error={errors.contactEmail?.message} />
-            <FormField label="Contact Phone" name="contactPhone" placeholder="+1 234 567 8900" required
+            <FormField label="Contact Phone" name="contactPhone" type="text" placeholder="0123456789" required
               register={register("contactPhone")} error={errors.contactPhone?.message} />
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <FormField label="Shop Cover Photo URL" name="photo" placeholder="https://example.com/cover.jpg"
+              register={register("photo")} error={errors.photo?.message} />
+            <FormField label="Poster Image URL" name="poster" placeholder="https://example.com/poster.jpg"
+              register={register("poster")} error={errors.poster?.message} />
           </div>
 
           {/* ── Photos ── */}
-          {sectionTitle("Shop Photos")}
+          {sectionTitle("Shop Photos (optional)")}
           <div style={{ display: "flex", flexDirection: "column", gap: "8px", marginBottom: "16px" }}>
             {photos.map((_, index) => (
-              <div key={index} style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-                <input
-                  value={photos[index]}
-                  onChange={(e) => updateArrayItem("photos", photos, index, e.target.value)}
-                  placeholder="https://example.com/photo.jpg"
-                  className="form-control"
-                  style={{ flex: 1, height: "38px", fontSize: "13px" }}
-                />
-                <button type="button" onClick={() => removeFromArray("photos", photos, index)}
-                  style={{ background: "#fff1f1", border: "1px solid #fca5a5", borderRadius: "6px", cursor: "pointer", color: "#e53e3e", display: "flex", alignItems: "center", justifyContent: "center", width: "34px", height: "34px", flexShrink: 0 }}>
-                  <IoTrashOutline size={15} />
-                </button>
+              <div key={index} style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+                  <input
+                    value={photos[index]}
+                    onChange={(e) => updateArrayItem("photos", photos, index, e.target.value)}
+                    placeholder="https://example.com/photo.jpg"
+                    className="form-control"
+                    style={{ flex: 1, height: "38px", fontSize: "13px" }}
+                  />
+                  <button type="button" onClick={() => removeFromArray("photos", photos, index)}
+                    style={{ background: "#fff1f1", border: "1px solid #fca5a5", borderRadius: "6px", cursor: "pointer", color: "#e53e3e", display: "flex", alignItems: "center", justifyContent: "center", width: "34px", height: "34px", flexShrink: 0 }}>
+                    <IoTrashOutline size={15} />
+                  </button>
+                </div>
+                {(errors.photos as any)?.[index]?.message && (
+                  <span style={{ color: "#e53e3e", fontSize: "12px" }}>
+                    {(errors.photos as any)[index].message}
+                  </span>
+                )}
               </div>
             ))}
           </div>
@@ -183,10 +196,17 @@ const ShopFormModal = ({ open, onClose, onSaved, editShop }: ShopFormModalProps)
             value={allItemInput}
             onChange={(e) => setAllItemInput(e.target.value)}
             onKeyDown={handleAddAllItem}
-            placeholder="Type item name and press Enter..."
+            placeholder="Type item name and press Enter... (required)"
             className="form-control"
-            style={{ height: "38px", fontSize: "13px", marginBottom: "24px" }}
+            style={{ height: "38px", fontSize: "13px", marginBottom: "6px" }}
           />
+          {errors.allItems && (
+            <div style={{ color: "#e53e3e", fontSize: "12px", marginBottom: "18px" }}>
+              {typeof errors.allItems.message === "string"
+                ? errors.allItems.message
+                : "At least one item is required"}
+            </div>
+          )}
 
           {/* ── Shop Timing ── */}
           {sectionTitle("Shop Timing")}

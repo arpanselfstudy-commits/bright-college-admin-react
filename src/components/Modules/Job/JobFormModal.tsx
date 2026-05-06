@@ -133,15 +133,15 @@ const JobFormModal = ({ open, onClose, onSaved, editJob }: JobFormModalProps) =>
           <div className="grid grid-cols-2 gap-4">
             <FormField label="Location" name="location" placeholder="e.g. New York, NY" required
               register={register("location")} error={errors.location?.message} />
-            <FormField label="Experience (years)" name="experience" type="text" placeholder="e.g. 3" required
+            <FormField label="Experience (years)" name="experience" type="text" placeholder="0" required
               register={register("experience")} error={errors.experience?.message} />
           </div>
 
           {/* Row 4 — Salary */}
           <div className="grid grid-cols-2 gap-4">
-            <FormField label="Salary From ($)" name="salaryFrom" type="text" placeholder="e.g. 40000" required
+            <FormField label="Salary From ($)" name="salaryFrom" type="text" placeholder="0" required
               register={register("salaryFrom")} error={errors.salaryFrom?.message} />
-            <FormField label="Salary To ($)" name="salaryTo" type="text" placeholder="e.g. 60000" required
+            <FormField label="Salary To ($)" name="salaryTo" type="text" placeholder="0" required
               register={register("salaryTo")} error={errors.salaryTo?.message} />
           </div>
 
@@ -194,7 +194,7 @@ const JobFormModal = ({ open, onClose, onSaved, editJob }: JobFormModalProps) =>
           <div className="grid grid-cols-2 gap-4">
             <FormField label="Contact Email" name="contactEmail" type="email" placeholder="hr@company.com" required
               register={register("contactEmail")} error={errors.contactEmail?.message} />
-            <FormField label="Contact Phone" name="contactPhone" placeholder="+1 234 567 8900" required
+            <FormField label="Contact Phone" name="contactPhone" type="text" placeholder="0123456789" required
               register={register("contactPhone")} error={errors.contactPhone?.message} />
           </div>
 
