@@ -57,7 +57,7 @@ const Shop = () => {
             <li>
               <Tooltip title="Edit" placement="top" TransitionComponent={Zoom} arrow>
                 <button
-                  style={{ background: "none", border: "none", cursor: "pointer", color: "var(--clr-primary)", display: "flex" }}
+                  className="tbl-icon-btn tbl-icon-btn--primary"
                   onClick={() => openEdit(row)}
                 >
                   <FiEdit2 size={17} />
@@ -67,7 +67,7 @@ const Shop = () => {
             <li>
               <Tooltip title="Delete" placement="top" TransitionComponent={Zoom} arrow>
                 <button
-                  style={{ background: "none", border: "none", cursor: "pointer", color: "#e53e3e", display: "flex" }}
+                  className="tbl-icon-btn tbl-icon-btn--danger"
                   onClick={() => setDeleteTarget(row)}
                 >
                   <IoTrashOutline size={18} />

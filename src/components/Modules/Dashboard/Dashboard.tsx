@@ -208,19 +208,19 @@ const Dashboard = () => {
                 ]}
                 width={280}
                 height={200}
-                slotProps={{ legend: { hidden: true } }}
+                slots={{ legend: () => null }}
               />
             )}
             {/* custom legend */}
             <div className="db-donut-legend">
               <div className="db-donut-legend-item">
-                <span className="db-donut-dot" style={{ background: "#10b981" }} />
+                <span className="db-donut-dot db-donut-dot--login" />
                 <span className="db-donut-legend-label">Logins</span>
                 <span className="db-donut-legend-val">{logins.toLocaleString()}</span>
                 <span className="db-donut-legend-pct">{loginPct}%</span>
               </div>
               <div className="db-donut-legend-item">
-                <span className="db-donut-dot" style={{ background: "#f97316" }} />
+                <span className="db-donut-dot db-donut-dot--logout" />
                 <span className="db-donut-legend-label">Logouts</span>
                 <span className="db-donut-legend-val">{logouts.toLocaleString()}</span>
                 <span className="db-donut-legend-pct">{logoutPct}%</span>

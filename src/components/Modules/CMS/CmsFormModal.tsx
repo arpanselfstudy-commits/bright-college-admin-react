@@ -33,28 +33,20 @@ const CmsFormModal = ({ open, onClose, onSaved, editItem }: CmsFormModalProps) =
       disableAutoFocus
       disableRestoreFocus
       slotProps={{
-        paper: {
-          style: {
-            borderRadius: "16px",
-            display: "flex",
-            flexDirection: "column",
-            maxHeight: "90vh",
-          },
-        },
+        paper: { className: "modal-paper" },
       }}
     >
       {/* Header */}
-      <div style={{ background: "var(--clr-primary)", padding: "18px 28px", display: "flex", alignItems: "center", justifyContent: "space-between", flexShrink: 0 }}>
-        <h3 style={{ color: "#fff", margin: 0, fontSize: "18px", fontWeight: 600 }}>
+      <div className="modal-header">
+        <h3 className="modal-header-title">
           {isEdit ? "Edit CMS Item" : "Create CMS Item"}
         </h3>
-        <button type="button" onClick={onClose}
-          style={{ background: "rgba(255,255,255,0.15)", border: "none", borderRadius: "8px", cursor: "pointer", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", width: "32px", height: "32px" }}>
+        <button type="button" onClick={onClose} className="modal-close-btn">
           <IoCloseOutline size={20} />
         </button>
       </div>
 
-      <DialogContent style={{ padding: "24px 28px", overflowY: "auto", flex: "1 1 auto" }}>
+      <DialogContent className="modal-dialog-content">
         <form onSubmit={onSubmit} className="form-main">
 
           <div className="grid grid-cols-2 gap-4">
@@ -88,21 +80,12 @@ const CmsFormModal = ({ open, onClose, onSaved, editItem }: CmsFormModalProps) =
           </div>
 
           {/* Active toggle */}
-          <div className="form-group mb-5" style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-            <label className="font-semibold label-colr" style={{ margin: 0 }}>Active</label>
-            <label style={{ position: "relative", display: "inline-flex", alignItems: "center", cursor: "pointer" }}>
-              <input type="checkbox" {...register("isActive")} style={{ opacity: 0, width: 0, height: 0, position: "absolute" }} />
-              <span style={{
-                width: "42px", height: "22px",
-                background: watch("isActive") ? "var(--clr-primary)" : "#ccc",
-                borderRadius: "11px", display: "inline-block", transition: "background 0.2s", position: "relative"
-              }}>
-                <span style={{
-                  position: "absolute", top: "4px",
-                  left: watch("isActive") ? "22px" : "4px",
-                  width: "14px", height: "14px",
-                  background: "#fff", borderRadius: "50%", transition: "left 0.2s"
-                }} />
+          <div className="form-group mb-5 toggle-field">
+            <label className="font-semibold label-colr toggle-field-label">Active</label>
+            <label className="toggle-label">
+              <input type="checkbox" {...register("isActive")} className="toggle-input" />
+              <span className={`toggle-track${watch("isActive") ? " toggle-track--on" : ""}`}>
+                <span className={`toggle-thumb${watch("isActive") ? " toggle-thumb--on" : ""}`} />
               </span>
             </label>
           </div>
@@ -118,9 +101,8 @@ const CmsFormModal = ({ open, onClose, onSaved, editItem }: CmsFormModalProps) =
           />
 
           {/* Footer */}
-          <div style={{ display: "flex", gap: "12px", justifyContent: "flex-end", paddingTop: "8px" }}>
-            <button type="button" onClick={onClose}
-              style={{ padding: "10px 24px", borderRadius: "8px", border: "1.5px solid var(--border-color)", background: "#fff", color: "var(--clr-dark-gray)", fontSize: "14px", fontWeight: 600, cursor: "pointer" }}>
+          <div className="modal-footer">
+            <button type="button" onClick={onClose} className="modal-cancel-btn">
               Cancel
             </button>
             <CustomButton

@@ -41,60 +41,21 @@ const JobFormModal = ({ open, onClose, onSaved, editJob }: JobFormModalProps) =>
       // the native date-picker click-through issue on the backdrop
       disablePortal={false}
       slotProps={{
-        paper: {
-          style: {
-            borderRadius: "16px",
-            display: "flex",
-            flexDirection: "column",
-            maxHeight: "90vh",
-            overflow: "hidden",
-          },
-        },
+        paper: { className: "modal-paper modal-paper--overflow-hidden" },
       }}
     >
       {/* Sticky header */}
-      <div
-        style={{
-          background: "var(--clr-primary)",
-          padding: "18px 28px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          flexShrink: 0,
-        }}
-      >
-        <h3 style={{ color: "#fff", margin: 0, fontSize: "18px", fontWeight: 600 }}>
+      <div className="modal-header">
+        <h3 className="modal-header-title">
           {isEdit ? "Edit Job" : "Create New Job"}
         </h3>
-        <button
-          type="button"
-          onClick={onClose}
-          style={{
-            background: "rgba(255,255,255,0.15)",
-            border: "none",
-            borderRadius: "8px",
-            cursor: "pointer",
-            color: "#fff",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: "32px",
-            height: "32px",
-          }}
-        >
+        <button type="button" onClick={onClose} className="modal-close-btn">
           <IoCloseOutline size={20} />
         </button>
       </div>
 
       {/* Scrollable body */}
-      <DialogContent
-        dividers
-        style={{
-          padding: "24px 28px",
-          overflowY: "auto",
-          flex: "1 1 auto",
-        }}
-      >
+      <DialogContent dividers className="modal-dialog-content">
         <form onSubmit={onSubmit} className="form-main">
 
           {/* Row 1 */}
@@ -156,18 +117,17 @@ const JobFormModal = ({ open, onClose, onSaved, editJob }: JobFormModalProps) =>
               Responsibilities <span className="mandatory-icon">*</span>
             </label>
             {fields.map((field, index) => (
-              <div key={field.id} style={{ display: "flex", gap: "8px", marginBottom: "8px", alignItems: "flex-start" }}>
+              <div key={field.id} className="array-field-row">
                 <input
                   {...register(`responsibilities.${index}.value`)}
                   placeholder={`Responsibility ${index + 1}`}
-                  className="form-control"
-                  style={{ flex: 1 }}
+                  className="form-control array-field-input"
                 />
                 {fields.length > 1 && (
                   <button
                     type="button"
                     onClick={() => remove(index)}
-                    style={{ height: "56px", width: "44px", flexShrink: 0, background: "#fff1f1", border: "1px solid #fca5a5", borderRadius: "6px", cursor: "pointer", color: "#e53e3e", display: "flex", alignItems: "center", justifyContent: "center" }}
+                    className="array-remove-btn"
                   >
                     <IoTrashOutline size={17} />
                   </button>
@@ -184,7 +144,7 @@ const JobFormModal = ({ open, onClose, onSaved, editJob }: JobFormModalProps) =>
             <button
               type="button"
               onClick={() => append({ value: "" })}
-              style={{ marginTop: "8px", display: "inline-flex", alignItems: "center", gap: "4px", background: "var(--primary-color-light)", border: "1px solid var(--clr-accent-blue)", borderRadius: "8px", padding: "7px 14px", cursor: "pointer", color: "var(--clr-primary)", fontSize: "13px", fontWeight: 600 }}
+              className="add-item-btn"
             >
               <IoAddOutline size={16} /> Add Responsibility
             </button>
@@ -199,12 +159,8 @@ const JobFormModal = ({ open, onClose, onSaved, editJob }: JobFormModalProps) =>
           </div>
 
           {/* Footer */}
-          <div style={{ display: "flex", gap: "12px", justifyContent: "flex-end", paddingTop: "8px" }}>
-            <button
-              type="button"
-              onClick={onClose}
-              style={{ padding: "10px 24px", borderRadius: "8px", border: "1.5px solid var(--border-color)", background: "#fff", color: "var(--clr-dark-gray)", fontSize: "14px", fontWeight: 600, cursor: "pointer" }}
-            >
+          <div className="modal-footer">
+            <button type="button" onClick={onClose} className="modal-cancel-btn">
               Cancel
             </button>
             <CustomButton

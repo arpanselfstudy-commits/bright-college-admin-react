@@ -17,10 +17,8 @@ interface ShopFormModalProps {
 const DAYS = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"] as const;
 
 const sectionTitle = (text: string) => (
-  <div style={{ borderBottom: "2px solid var(--primary-color-light)", paddingBottom: "6px", marginBottom: "16px", marginTop: "8px" }}>
-    <span style={{ fontSize: "14px", fontWeight: 700, color: "var(--clr-primary)", textTransform: "uppercase", letterSpacing: "0.05em" }}>
-      {text}
-    </span>
+  <div className="section-title-divider">
+    <span className="section-title-text">{text}</span>
   </div>
 );
 
@@ -75,28 +73,20 @@ const ShopFormModal = ({ open, onClose, onSaved, editShop }: ShopFormModalProps)
       fullWidth
       scroll="paper"
       slotProps={{
-        paper: {
-          style: {
-            borderRadius: "16px",
-            display: "flex",
-            flexDirection: "column",
-            maxHeight: "90vh",
-          },
-        },
+        paper: { className: "modal-paper" },
       }}
     >
       {/* Sticky header */}
-      <div style={{ background: "var(--clr-primary)", padding: "18px 28px", display: "flex", alignItems: "center", justifyContent: "space-between", flexShrink: 0 }}>
-        <h3 style={{ color: "#fff", margin: 0, fontSize: "18px", fontWeight: 600 }}>
+      <div className="modal-header">
+        <h3 className="modal-header-title">
           {isEdit ? "Edit Shop" : "Create New Shop"}
         </h3>
-        <button type="button" onClick={onClose}
-          style={{ background: "rgba(255,255,255,0.15)", border: "none", borderRadius: "8px", cursor: "pointer", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", width: "32px", height: "32px" }}>
+        <button type="button" onClick={onClose} className="modal-close-btn">
           <IoCloseOutline size={20} />
         </button>
       </div>
 
-      <DialogContent style={{ padding: "24px 28px", overflowY: "auto", flex: "1 1 auto" }}>
+      <DialogContent className="modal-dialog-content">
         <form onSubmit={onSubmit} className="form-main">
 
           {/* ── Basic Info ── */}
@@ -128,24 +118,23 @@ const ShopFormModal = ({ open, onClose, onSaved, editShop }: ShopFormModalProps)
 
           {/* ── Photos ── */}
           {sectionTitle("Shop Photos (optional)")}
-          <div style={{ display: "flex", flexDirection: "column", gap: "8px", marginBottom: "16px" }}>
+          <div className="photos-list">
             {photos.map((_, index) => (
-              <div key={index} style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
-                <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+              <div key={index} className="photo-row">
+                <div className="photo-row-inner">
                   <input
                     value={photos[index]}
                     onChange={(e) => updateArrayItem("photos", photos, index, e.target.value)}
                     placeholder="https://example.com/photo.jpg"
-                    className="form-control"
-                    style={{ flex: 1, height: "38px", fontSize: "13px" }}
+                    className="form-control photo-input"
                   />
                   <button type="button" onClick={() => removeFromArray("photos", photos, index)}
-                    style={{ background: "#fff1f1", border: "1px solid #fca5a5", borderRadius: "6px", cursor: "pointer", color: "#e53e3e", display: "flex", alignItems: "center", justifyContent: "center", width: "34px", height: "34px", flexShrink: 0 }}>
+                    className="photo-remove-btn">
                     <IoTrashOutline size={15} />
                   </button>
                 </div>
                 {(errors.photos as any)?.[index]?.message && (
-                  <span style={{ color: "#e53e3e", fontSize: "12px" }}>
+                  <span className="photo-error">
                     {(errors.photos as any)[index].message}
                   </span>
                 )}
@@ -153,18 +142,18 @@ const ShopFormModal = ({ open, onClose, onSaved, editShop }: ShopFormModalProps)
             ))}
           </div>
           <button type="button" onClick={() => addToArray("photos", photos)}
-            style={{ display: "inline-flex", alignItems: "center", gap: "4px", background: "var(--primary-color-light)", border: "1px solid var(--clr-accent-blue)", borderRadius: "8px", padding: "7px 14px", cursor: "pointer", color: "var(--clr-primary)", fontSize: "13px", fontWeight: 600, marginBottom: "24px" }}>
+            className="add-item-btn add-photo-btn">
             <IoAddOutline size={16} /> Add Photo URL
           </button>
 
           {/* ── Top Items ── */}
           {sectionTitle("Top Items")}
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", marginBottom: "10px" }}>
+          <div className="tag-chips">
             {topItems.map((item, index) => (
-              <span key={index} style={{ display: "inline-flex", alignItems: "center", gap: "6px", background: "var(--primary-color-light)", border: "1px solid var(--clr-accent-blue)", borderRadius: "20px", padding: "5px 12px", fontSize: "13px", color: "var(--clr-primary)", fontWeight: 500 }}>
+              <span key={index} className="tag-chip">
                 {item}
                 <button type="button" onClick={() => removeFromArray("topItems", topItems, index)}
-                  style={{ background: "none", border: "none", cursor: "pointer", color: "var(--clr-primary)", display: "flex", padding: 0, lineHeight: 1 }}>
+                  className="tag-chip-remove">
                   <IoCloseOutline size={15} />
                 </button>
               </span>
@@ -175,18 +164,17 @@ const ShopFormModal = ({ open, onClose, onSaved, editShop }: ShopFormModalProps)
             onChange={(e) => setTopItemInput(e.target.value)}
             onKeyDown={handleAddTopItem}
             placeholder="Type item name and press Enter..."
-            className="form-control"
-            style={{ height: "38px", fontSize: "13px", marginBottom: "24px" }}
+            className="form-control tag-input"
           />
 
           {/* ── All Items ── */}
           {sectionTitle("All Items")}
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", marginBottom: "10px" }}>
+          <div className="tag-chips">
             {allItems.map((item, index) => (
-              <span key={index} style={{ display: "inline-flex", alignItems: "center", gap: "6px", background: "var(--primary-color-light)", border: "1px solid var(--clr-accent-blue)", borderRadius: "20px", padding: "5px 12px", fontSize: "13px", color: "var(--clr-primary)", fontWeight: 500 }}>
+              <span key={index} className="tag-chip">
                 {item}
                 <button type="button" onClick={() => removeFromArray("allItems", allItems, index)}
-                  style={{ background: "none", border: "none", cursor: "pointer", color: "var(--clr-primary)", display: "flex", padding: 0, lineHeight: 1 }}>
+                  className="tag-chip-remove">
                   <IoCloseOutline size={15} />
                 </button>
               </span>
@@ -197,11 +185,10 @@ const ShopFormModal = ({ open, onClose, onSaved, editShop }: ShopFormModalProps)
             onChange={(e) => setAllItemInput(e.target.value)}
             onKeyDown={handleAddAllItem}
             placeholder="Type item name and press Enter... (required)"
-            className="form-control"
-            style={{ height: "38px", fontSize: "13px", marginBottom: "6px" }}
+            className="form-control tag-input tag-input--last"
           />
           {errors.allItems && (
-            <div style={{ color: "#e53e3e", fontSize: "12px", marginBottom: "18px" }}>
+            <div className="tag-error">
               {typeof errors.allItems.message === "string"
                 ? errors.allItems.message
                 : "At least one item is required"}
@@ -210,43 +197,43 @@ const ShopFormModal = ({ open, onClose, onSaved, editShop }: ShopFormModalProps)
 
           {/* ── Shop Timing ── */}
           {sectionTitle("Shop Timing")}
-          <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginBottom: "24px" }}>
+          <div className="shop-timing-list">
             {DAYS.map((day) => {
               const isOpen = watch(`shopTiming.${day}.isOpen`);
               return (
-                <div key={day} className="shop-timing-row" style={{ background: isOpen ? "var(--primary-color-light)" : "#f9f9f9", borderRadius: "10px", padding: "10px 14px", border: "1px solid var(--border-color)" }}>
+                <div key={day} className={`shop-timing-row${isOpen ? " shop-timing-row--open" : ""}`}>
                   {/* Day label + toggle */}
-                  <div style={{ display: "flex", alignItems: "center", gap: "8px", minWidth: "100px" }}>
-                    <label style={{ position: "relative", display: "inline-flex", alignItems: "center", cursor: "pointer" }}>
+                  <div className="shop-timing-day">
+                    <label className="shop-timing-toggle-label">
                       <input type="checkbox" {...register(`shopTiming.${day}.isOpen`)}
-                        style={{ opacity: 0, width: 0, height: 0, position: "absolute" }}
+                        className="shop-timing-toggle-input"
                         onChange={(e) => setValue(`shopTiming.${day}.isOpen`, e.target.checked, { shouldDirty: true })}
                         checked={!!isOpen}
                       />
-                      <span style={{ width: "36px", height: "20px", background: isOpen ? "var(--clr-primary)" : "#ccc", borderRadius: "10px", display: "inline-block", transition: "background 0.2s", position: "relative" }}>
-                        <span style={{ position: "absolute", top: "3px", left: isOpen ? "18px" : "3px", width: "14px", height: "14px", background: "#fff", borderRadius: "50%", transition: "left 0.2s" }} />
+                      <span className={`shop-timing-track${isOpen ? " shop-timing-track--on" : ""}`}>
+                        <span className={`shop-timing-thumb${isOpen ? " shop-timing-thumb--on" : ""}`} />
                       </span>
                     </label>
-                    <span style={{ fontSize: "13px", fontWeight: 600, color: "var(--clr-dark-gray)", textTransform: "capitalize" }}>{day}</span>
+                    <span className="shop-timing-day-name">{day}</span>
                   </div>
 
                   {/* Status */}
-                  <span style={{ fontSize: "12px", color: isOpen ? "var(--clr-primary)" : "#a1a1a1", fontWeight: 500 }}>
+                  <span className={`shop-timing-status${isOpen ? " shop-timing-status--open" : ""}`}>
                     {isOpen ? "Open" : "Closed"}
                   </span>
 
                   {/* Opens At */}
-                  <div>
-                    <label style={{ fontSize: "11px", color: "#7a7a7a", display: "block", marginBottom: "2px" }}>Opens At</label>
+                  <div className="shop-timing-time-group">
+                    <label>Opens At</label>
                     <input type="time" {...register(`shopTiming.${day}.opensAt`)} disabled={!isOpen}
-                      className="form-control" style={{ height: "36px", fontSize: "13px", opacity: isOpen ? 1 : 0.4 }} />
+                      className={`form-control shop-timing-time-input${!isOpen ? " shop-timing-time-input--disabled" : ""}`} />
                   </div>
 
                   {/* Closes At */}
-                  <div>
-                    <label style={{ fontSize: "11px", color: "#7a7a7a", display: "block", marginBottom: "2px" }}>Closes At</label>
+                  <div className="shop-timing-time-group">
+                    <label>Closes At</label>
                     <input type="time" {...register(`shopTiming.${day}.closesAt`)} disabled={!isOpen}
-                      className="form-control" style={{ height: "36px", fontSize: "13px", opacity: isOpen ? 1 : 0.4 }} />
+                      className={`form-control shop-timing-time-input${!isOpen ? " shop-timing-time-input--disabled" : ""}`} />
                   </div>
                 </div>
               );
@@ -254,9 +241,8 @@ const ShopFormModal = ({ open, onClose, onSaved, editShop }: ShopFormModalProps)
           </div>
 
           {/* Footer */}
-          <div style={{ display: "flex", gap: "12px", justifyContent: "flex-end", paddingTop: "8px" }}>
-            <button type="button" onClick={onClose}
-              style={{ padding: "10px 24px", borderRadius: "8px", border: "1.5px solid var(--border-color)", background: "#fff", color: "var(--clr-dark-gray)", fontSize: "14px", fontWeight: 600, cursor: "pointer" }}>
+          <div className="modal-footer">
+            <button type="button" onClick={onClose} className="modal-cancel-btn">
               Cancel
             </button>
             <CustomButton

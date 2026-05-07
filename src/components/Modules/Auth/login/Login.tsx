@@ -15,7 +15,7 @@ const Login: React.FC = () => {
 
   return (
     <section className="log-Reg-Wrap">
-      <div className="grid grid-cols-2 h-full" style={{ gap: 0 }}>
+      <div className="grid grid-cols-2 h-full login-grid">
         {/* Left Side Logo and Info */}
         <div className="logoReg-Bg">
           <div className="log-reg-lt">
