@@ -4140,3 +4140,46 @@ input.search-box {
 
 .db-donut-dot--login  { background: #10b981; }
 .db-donut-dot--logout { background: #f97316; }
+
+/* ── 404 Not Found ── */
+.not-found-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+  padding: 40px 20px;
+}
+.not-found-code {
+  font-size: 120px;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--clr-primary);
+  opacity: 0.2;
+  margin-bottom: 16px;
+}
+.not-found-title {
+  font-size: var(--f-size-L);
+  color: var(--clr-dark-gray);
+  margin-bottom: 12px;
+}
+.not-found-desc {
+  font-size: var(--f-size-Body);
+  color: var(--clr-gray);
+  margin-bottom: 32px;
+}
+.not-found-btn {
+  background: var(--clr-primary);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 28px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.not-found-btn:hover {
+  background: var(--primary-color-dark);
+}

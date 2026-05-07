@@ -11,6 +11,7 @@ import Dashboard from './Page/Dashboard/Dashboard';
 import ShopManagement from './Page/Shop';
 import JobManagement from './Page/Job';
 import CMS from './Page/CMS';
+import NotFound from './Page/NotFound/NotFound';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
             </PublicRoute>
           }
         />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
